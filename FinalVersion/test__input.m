@@ -12,8 +12,8 @@ test_day_tag=test_data(6);
 mean_test_input=mean_std(1);
 std_test_input=mean_std(2);
 
-lower_limit= -beta*std_test_input; % beta:learning parameter
-upper_limit=beta*std_test_input;
+lower_limit= mean_test_input-beta*std_test_input; % beta:learning parameter
+upper_limit=mean_test_input+beta*std_test_input;
 
 if test_energy_consumption>=lower_limit && test_energy_consumption<upper_limit
     a='Given test inputs is not Anamoly';
