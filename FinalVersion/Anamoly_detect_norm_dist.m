@@ -26,6 +26,8 @@ for ii=1:total_months
         Models.StoreNumber{ii,jj}=selected_store;
         Models.DataWorkingDays{ii,jj}=[mean_energy_working_day,std_energy_working];
         Models.DataOffDays{ii,jj}=[mean_energy_off_days,std_energy_off_days];
+        Models.DataWorkingDaysComplete{ii,jj}=working_days_data_aug;
+        Models.DataOffDaysComplete{ii,jj}=off_days_data_month_jj;
         
     end
     Models.Months{ii}=selected_month;
