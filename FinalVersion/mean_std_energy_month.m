@@ -1,4 +1,4 @@
-function[mean_energy,std_energy] = mean_std_energy_month(data_one_month)
+function[data_hours,mean_energy,std_energy] = mean_std_energy_month(data_one_month)
 hours=unique(data_one_month(:,2));
 hours_per_day = length(hours);
 mean_energy=zeros(hours_per_day,1);
@@ -10,15 +10,17 @@ for ii=1:hours_per_day
     minor_fence_upper=minor_fence(1);
     minor_fence_lower=minor_fence(2);
     data_outliers_hour_ii=data_hour_ii>=minor_fence_lower & data_hour_ii<=minor_fence_upper;
-    data_hour_ii=data_hour_ii(data_outliers_hour_ii==1);
-    mean_hours_ii=mean(data_hour_ii);
-    std_hours_ii=std(data_hour_ii);
+    data_hour_filter_ii=data_hour_ii(data_outliers_hour_ii==1);
+    mean_hours_ii=mean(data_hour_filter_ii);
+    std_hours_ii=std(data_hour_filter_ii);
     if std_hours_ii ==0
         std_hours_ii=0.1;%%%%%%
     end
     
     mean_energy(ii)=mean_hours_ii;
     std_energy(ii)=std_hours_ii;
+    data_hours.unfiltered{ii}=data_hour_ii;
+    data_hours.filtered{ii}=data_hour_filter_ii;
     
 end
 end

@@ -14,20 +14,22 @@ for ii=1:total_months
         
         working_days_month_jj=find(data_month_jj(:,6)==1);
         working_days_data_aug = data_month_jj(working_days_month_jj,:);
-        [mean_energy_working_day,std_energy_working] = mean_std_energy_month(working_days_data_aug);
+        [data_hours_workingdays_ol,mean_energy_working_day,std_energy_working] = mean_std_energy_month(working_days_data_aug);
         
         
         
         off_days_month_jj=find(data_month_jj(:,6)==0);
         off_days_data_month_jj = data_month_jj(off_days_month_jj,:);
         
-        [mean_energy_off_days,std_energy_off_days] = mean_std_energy_month(off_days_data_month_jj);
+        [data_hours_offdays_ol,mean_energy_off_days,std_energy_off_days] = mean_std_energy_month(off_days_data_month_jj);
         
         Models.StoreNumber{ii,jj}=selected_store;
         Models.DataWorkingDays{ii,jj}=[mean_energy_working_day,std_energy_working];
         Models.DataOffDays{ii,jj}=[mean_energy_off_days,std_energy_off_days];
         Models.DataWorkingDaysComplete{ii,jj}=working_days_data_aug;
         Models.DataOffDaysComplete{ii,jj}=off_days_data_month_jj;
+        Models.OutliersFilterslWorkingDays{ii,jj}=data_hours_workingdays_ol;
+        Models.OutliersFilterslOffDays{ii,jj}=data_hours_offdays_ol;
         
     end
     Models.Months{ii}=selected_month;
